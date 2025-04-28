@@ -41,6 +41,11 @@ jobs:
         with:
           path:
             data
+      - name: Second artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path:
+            main
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
