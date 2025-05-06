@@ -1,30 +1,36 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <title>Valour Server</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("beta").onclick = function() {
+          let wind = window.open("");
+          wind.document.body.innerHTML = `<iframe src="betatest.html" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>`;
+        }
+        document.getElementById("main").onclick = function() {
+          let wind = window.open("");
+          wind.document.body.innerHTML = `<iframe src="eaglersecure.html" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>`;
+        }
+      });
+    </script>
+  </head>
   <body style="background:black; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; height: 100vh; margin: 0;">
-
     <!-- Top section with h1 and buttons -->
-    <div> style="text-align: center; margin-top: 20px;"
+    <div style="text-align: center; margin-top: 20px;">
       <h1 style="color:white;">NEW! CHECK OUT THE VALOUR SERVER!
-        <a href="https://app.valour.gg/I/hhh90KJz" target="_blank" style="color:lightblue; text-decoration: none; button-align: center;">https://app.valour.gg/I/hhh90KJz</a>
+        <a href="https://app.valour.gg/I/hhh90KJz" target="_blank" style="color:lightblue; text-decoration: none;">https://app.valour.gg/I/hhh90KJz</a>
       </h1>
       <div>
         <button style="margin: 70px;" id="beta">BETA VERSION</button>
         <button style="margin: 70px;" id="main">MAIN VERSION</button>
       </div>
     </div>
-
     <!-- h2 text section -->
     <h2 style="color:white; margin-top: 18px; text-align: center;">Please note that loading time may take some time. Data transfer is slow. Also, Do not expect servers to work while using a school network. Thank you for your understanding.</h2>
-
-<script>
-  document.getElementById("beta").onclick = function() {
-    let wind = window.open("");
-    wind.document.body.innerHTML = `<iframe src="betatest.html" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>`;
-  }
-
-  document.getElementById("main").onclick = function() {
-    let wind = window.open("");
-    wind.document.body.innerHTML = `<iframe src="eaglersecure.html" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>`;
-  }
+  </body>
+</html>
+  <script>
       [
           {
             "featureStates": "{}",
