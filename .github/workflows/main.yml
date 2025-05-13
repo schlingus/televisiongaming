@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -28,7 +28,7 @@ jobs:
     needs: artifact
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run linter
         run: echo "Running linter..." # Replace with actual linter command
@@ -38,7 +38,7 @@ jobs:
     needs: artifact
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build application
         run: echo "Building application..." # Replace with actual build command
@@ -54,7 +54,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Deploy to Staging
         run: |
@@ -68,7 +68,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Deploy to Production
         run: |
@@ -101,7 +101,7 @@ jobs:
     needs: lint
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run performance tests
         run: echo "Running performance tests..." # Replace with actual performance test command
@@ -117,7 +117,7 @@ jobs:
     needs: lint
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run security scan
         run: echo "Running security scan..." # Replace with actual security scan command
@@ -133,7 +133,7 @@ jobs:
     needs: lint
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run integration tests
         run: echo "Running integration tests..." # Replace with actual integration test command
@@ -149,7 +149,7 @@ jobs:
     needs: lint
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run coverage report
         run: echo "Running coverage report..." # Replace with actual coverage report command
@@ -164,7 +164,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run scheduled tests
         run: echo "Running scheduled tests..." # Replace with actual scheduled test command
