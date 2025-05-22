@@ -5,7 +5,7 @@
   # 2. create a `deploy.yml` in a `.github/workflows/deploy.yml` path! Put the following code:
 
 
-`
+```YAML
      name: Deploy website
 
 on:
@@ -65,7 +65,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
+```
 
   # 3. Then, wait for it to deploy. And test out the website! You can tweak the `index.html` file if you want.
   # 4. Open up the `Server` branch and make a codespaces on that branch.
