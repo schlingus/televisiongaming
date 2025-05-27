@@ -7,7 +7,6 @@
 <title>Canvas</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
-  @import url('https://bsd.instructure.com/?login_success=1');
 
   /* Fullscreen black background */
   html, body {
@@ -69,6 +68,9 @@
   #choice-text {
     user-select: text;
   }
+  #result-message {
+    margin-top: 1rem;
+  }
 </style>
 </head>
 <body>
@@ -80,14 +82,18 @@
     <div id="choice-prompt" style="display:none;">
       <span id="choice-text">Would you like to load the main version? (y/n)</span><span class="cursor" id="choice-cursor">█</span>
     </div>
-    <div id="result-message" style="margin-top:1rem;"></div>
+    <div id="result-message"></div>
   </div>
+
+  <!-- Audio element for loading sound -->
+  <audio id="loading-audio" src="audio/main.mp3" preload="auto"></audio>
 
 <script>
   const loadingLine = document.getElementById('loading-line');
   const choicePrompt = document.getElementById('choice-prompt');
   const choiceCursor = document.getElementById('choice-cursor');
   const resultMessage = document.getElementById('result-message');
+  const loadingAudio = document.getElementById('loading-audio');
 
   let currentPercent = 1;
   let acceptingInput = false;
@@ -100,6 +106,7 @@
     } else {
       loadingLine.style.display = 'none';
       showChoicePrompt();
+      loadingAudio.pause(); // Stop audio when loading is complete
     }
   }
 
@@ -108,27 +115,49 @@
     acceptingInput = true;
   }
 
-  function handleKeyPress(event) {
+  async function handleKeyPress(event) {
     if (!acceptingInput) return;
 
     const key = event.key.toLowerCase();
     if (key === 'y' || key === 'n') {
       acceptingInput = false;
       choiceCursor.style.display = 'none';
+      loadingAudio.pause(); // Stop audio when choice is made
       if (key === 'y') {
-        resultMessage.textContent = 'Loading...';
-        // Open about:blank in new tab
-        window.open('eaglersecure.html');
-        // Navigate current window to eaglersecure.html
-        window.location.href = 'about:blank', '_blank';
+        resultMessage.textContent = 'Loading main version in new tab...';
+        const newTab = window.open('about:blank', '_blank');
+        if (!newTab) {
+          resultMessage.textContent = 'Popup blocked! Please allow popups to proceed.';
+          return;
+        }
+        try {
+          const response = await fetch('eaglersecure.html');
+          if (!response.ok) {
+            throw new Error('Failed to load eaglersecure.html');
+          }
+          const htmlContent = await response.text();
+          newTab.document.open();
+          newTab.document.write(htmlContent);
+          newTab.document.close();
+          resultMessage.textContent = 'EaglerSecure loaded in new tab.';
+        } catch (error) {
+          resultMessage.textContent = 'Error loading content: ' + error.message;
+          newTab.close();
+        }
       } else {
         resultMessage.textContent = 'Operation cancelled.';
       }
     }
   }
 
+  // Start playing audio when loading starts
+  loadingAudio.play().catch(() => {
+    // Audio play can be blocked until user interaction, ignore errors silently
+  });
+
   setTimeout(updateLoading, 800);
   window.addEventListener('keydown', handleKeyPress);
 </script>
 </body>
 </html>
+
